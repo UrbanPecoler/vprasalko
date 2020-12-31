@@ -1,0 +1,126 @@
+body {
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+}
+
+.searchbar{
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 40px;
+  background-color: #f0f0f0;
+  border-radius: 30px;
+  padding: 10px;
+  }
+
+  .search_input{
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color:transparent;
+  line-height: 20px;
+  transition: width 0.4s linear;
+  }
+
+  .searchbar:hover > .search_input{
+  padding: 0 10px;
+  width: 450px;
+  caret-color:rgb(112, 111, 168);
+  transition: width 0.4s linear;
+  }
+
+  .searchbar:hover > .search_icon{
+  background: white;
+  color: #e74c3c;
+  }
+
+  .search_icon{
+  height: 20px;
+  width: 20px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color:white;
+  text-decoration:none;
+  }
+
+.login {
+  margin-right: 10px;
+}
+
+.register-btn {
+  height: 40px;
+}
+
+.border {
+ border: white;
+
+}
+
+.register {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.razvrsti {
+  margin-top: 8px;
+}
+
+.title-line {
+  margin-top: 0px;
+}
+
+.question-info {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.answers-number .likes-number {
+  font-size: large;
+}
+
+.article-title  {
+  font-size: large;
+  text-align: center
+}
+
+.article-info {
+  text-align: right;
+  font-size: small;
+}
+
+.register-form {
+  text-align: center;
+}
