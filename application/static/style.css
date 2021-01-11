@@ -4,6 +4,26 @@ body {
     margin-top: 5rem;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+
+/* Navbar */
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+
+/* SearchBar */
 .searchbar{
   margin-bottom: auto;
   margin-top: auto;
@@ -48,8 +68,19 @@ body {
   text-decoration:none;
   }
 
+/* Login */
 .login {
   margin-right: 10px;
+}
+
+/* Register*/
+.register-form {
+  text-align: center;
+}
+
+.register {
+  padding-top: 0px;
+  margin-top: 0px;
 }
 
 .register-btn {
@@ -58,34 +89,35 @@ body {
 
 .border {
  border: white;
-
 }
 
-.register {
-  padding-top: 0px;
-  margin-top: 0px;
+.ask {
+  overflow: auto;
+  white-space: nowrap;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+/* Dropdown menu */
+.dropdown-menu {
+  background-color: #4b555c;;
 }
 
-.bg-steel {
-  background-color: #5f788a;
-}
-
-.site-header .navbar-nav .nav-link {
+.copy {
   color: #cbd5db;
+  margin-left: 10px;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+.dropdown-line {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: rgb(221, 221, 221);
 }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+.account {
+  margin-right: 100px;
 }
 
+
+/* Questions */
 .content-section {
   background: #ffffff;
   padding: 10px 20px;
@@ -121,6 +153,4 @@ h1, h2, h3, h4, h5, h6 {
   font-size: small;
 }
 
-.register-form {
-  text-align: center;
-}
+
