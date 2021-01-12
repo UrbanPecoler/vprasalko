@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from application import app, db, bcrypt
-from application.forms import RegistrationForm, LoginForm
+from application.forms import RegistrationForm, LoginForm, UpdateProfileForm
 from application.models import User, Question
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -45,7 +45,7 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Account created successfully!', 'success')
+        flash('Account created successfully! Please Log In', 'success')
         return redirect(url_for('home'))
     return render_template("register.html", title="Login", form=form)
 
@@ -57,5 +57,23 @@ def logout():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html', title='Profile')
+    return render_template('profile.html', title='Profile', posts=posts)
 
+@app.route("/edit_profile", methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = UpdateProfileForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        current_user.description = form.description.data
+        if form.description.data == "":
+            current_user.description = "No description yet."
+        db.session.commit()
+        flash('Your account information has been updated!', 'success')
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.description.data = current_user.description
+    return render_template('edit_profile.html', title='Edit-profile', form=form)
