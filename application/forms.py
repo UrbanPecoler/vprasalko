@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError
+from wtforms.widgets import TextArea
 from wtforms.validators import Length, InputRequired, Email, EqualTo
 from application.models import User
 
@@ -17,12 +17,12 @@ class RegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            raise ValidationError("That username is taken.")
+            raise ValidationError("That username is already taken.")
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError("That email is taken.")
+            raise ValidationError("That email is already taken.")
 
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])
@@ -33,7 +33,7 @@ class LoginForm(FlaskForm):
 class UpdateProfileForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired(), Length(min=2, max=15)])
     email = StringField("Email", validators=[InputRequired(), Email()])
-    description = StringField("Description")
+    description = StringField("Description", widget=TextArea())
     submit = SubmitField("Update")
 
     def validate_username(self, username):
@@ -47,3 +47,9 @@ class UpdateProfileForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError("That email is taken.")
+
+class QuestionForm(FlaskForm):
+    title = StringField("Title", validators=[InputRequired(), Length(min=3, max=100, 
+                                             message="Question can be a maximum of 50 characters long")], description="test")
+    content = StringField("Body", validators=[InputRequired()], widget=TextArea())
+    submit = SubmitField("Ask your question")

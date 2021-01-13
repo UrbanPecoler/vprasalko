@@ -2,33 +2,33 @@
 {% block content %}
     <div class="col-md-8 pd-0 mg-0">
         <div class="forum-title">
-            <div class="float-right forum-desc razvrsti">
+            <div class="float-right forum-desc filter">
                 <small>Filter: New | Top</small>
             </div>
             <h3>Mathematics</h3>
         </div>
         <hr class="title-line">
-        {% for post in posts %}
+        {% for question in questions %}
             <article class="media content-section">
                 <div class="media-body">
                     <div class="row">
-                        <div class="col-md-2 question-info">
+                        <div class="col-md-2 question-info mt-auto mb-auto">
                             <span class="likes-number">10</span>
                             <div>
                                 <small>Likes</small>
                             </div>
                         </div>
-                        <div class="col-md-2 question-info">
+                        <div class="col-md-2 question-info mt-auto mb-auto">
                             <span class="answers-number">2</span>
                             <div>
                                 <small>Answers</small>
                             </div>
                         </div>
-                        <div class="col-md-8 pl-1">
-                            <h3><a class="article-title" href="#">{{ post.title }}</a></h3>
+                        <div class="col-md-8 pl-5">
+                            <h3><a class="article-title" href="{{ url_for('question_post', question_id=question.id) }}">{{ question.title }}</a></h3>
                             <div class="article-metadata article-info">            
-                                <a class="mr-2" href="#">{{ post.author }}</a>
-                                <small class="text-muted">{{ post.date_posted }}</small>
+                                <a class="mr-2" href="#">{{ question.author.username }}</a>
+                                <small class="text-muted">asked on {{ question.date_posted.strftime('%d.%m.%Y %H:%M') }}</small>
                             </div>
                         </div>
                     </div>
@@ -36,17 +36,5 @@
             </article>
         {% endfor %}
     </div>
-    <div class="col-md-4 ml-auto">
-        <div class="content-section">
-            <h3>Subjects</h3>
-            <p class="text-muted"> If you have any questions regarding other subjects.
-                <ul class="list-group">
-                    <li class="list-group-item list-group-item-light">Mathematics</li>
-                    <li class="list-group-item list-group-item-light">Physics</li>
-                    <li class="list-group-item list-group-item-light">Programming</li>
-                    <li class="list-group-item list-group-item-light">Chemistry</li>
-                </ul>
-            </p>
-        </div>
-    </div>
+    {% include "sidebar.html" %}
 {% endblock content %}

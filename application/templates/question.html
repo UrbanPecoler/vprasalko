@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-md-8 pd-0 mg-0">
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">                   
+                    <h1 class="question-title">{{ question.title }}</h1>
+                        <small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ question.author.username }}</a> </small>
+                        <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <small class="ml-5">Likes: <b>10</b></small>
+                    <hr class="title-line">
+                </div>
+                <p class="article-content">{{ question.content }}</p>
+                {% if question.author == current_user %}
+                <div class="float-right">
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_question', question_id=question.id) }}">Update</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </div>
+                {% endif %}
+            </div>
+        </article>
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete question?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ url_for('delete_question', question_id=question.id) }}" method="POST">
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "sidebar.html" %}
+{% endblock content %}

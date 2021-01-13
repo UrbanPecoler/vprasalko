@@ -34,8 +34,7 @@
                     </div>
                     <div class="navbar-nav ml-auto">
                         {% if current_user.is_authenticated %}
-
-                            <a class="nav-item nav-link ask" href="#">Ask a Question</a>
+                            <a class="nav-item nav-link ask" href="{{ url_for('new_question') }}">Ask a Question</a>
                             <div class="dropdown">
                                 <a href="#" class="dropdown-toggle nav-item nav-link" data-toggle="dropdown">Account <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
