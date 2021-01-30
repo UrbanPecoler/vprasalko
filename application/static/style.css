@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Dropdown menu */
 .dropdown-menu {
-  background-color: #4b555c;;
+  background-color: #4b555c;
 }
 
 .copy {
@@ -158,5 +158,33 @@ h1, h2, h3, h4, h5, h6 {
   font-size: xx-large;
   text-align: center;
 }
+
+/* Page buttons */
+.page-align {
+  text-align: center;
+}
+
+
+/* Answer */
+.answer-title{
+  margin-left: 100px;
+}
+
+.answer {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+
+.answer-author {
+  text-align: center;
+}
+
+.answer-line {
+  background-color: rgb(161, 161, 161);
+  margin-top: 5px;
+}
+
+
 
 

@@ -6,7 +6,7 @@
                 <div class="article-metadata">                   
                     <h1 class="question-title">{{ question.title }}</h1>
                         <small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ question.author.username }}</a> </small>
-                        <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%d-%m-%Y') }}</small>
                         <small class="ml-5">Likes: <b>10</b></small>
                     <hr class="title-line">
                 </div>
@@ -19,7 +19,7 @@
                 {% endif %}
             </div>
         </article>
-        <!-- Modal -->
+        <!-- Delete question -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -38,6 +38,91 @@
                 </div>
             </div>
         </div>
+
+        <!-- All the answers -->
+        <div class="Forum-title">
+            <span class="row ml-auto">
+                <h4 class="ml-3">{{ answers.total }}</h4>
+                <h4 class="ml-2"> Answers</h4>
+            </span>
+        </div>
+        <hr class="answer-line">
+        {% for answer in answers.items %}
+        <article>
+            <div class="answer">
+                <p class="article-content">{{ answer.answer }}</p>
+                <div class="article-metadata">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% if answer.author == current_user %}
+                                <small class="mr-5 ml-3"><a href="{{ url_for('edit_answer', question_id=question.id, answer_id=answer.id) }}">Edit</a></small>
+                                <small class="mr-5 ml-1"><a href="#">Delete</a></small>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mr-auto">
+                            <div class="answer-author">
+                                <ul class="answer-info">
+                                    <li class="list-group"><small class="mr-5 ml-5">Answered {{ answer.date_posted.strftime('%d-%m-%Y') }}</small></li>
+                                    <li class="list-group"><small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ answer.author.username }}</a> </small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="answer-line">
+        </article>
+        {% endfor %}
+        <div class="page-align"> 
+            {% for page_num in answers.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if answers.page == page_num %}
+                        <a class="btn btn-dark mb-4" href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">{{ page_num }}</a>
+                    {% else %}
+                        <a class="btn btn-outline-dark mb-4" href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Type out the answer -->
+        {% if current_user.is_authenticated %}
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group mb-1">
+                    <div class="form-group">
+                        <h5 class="mb-0 mt-4">{{ form.answer.label(class="form-control-label ") }}</h4>
+                        {% if form.answer.errors %}
+                            {{ form.answer(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.answer.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.answer(class="form-control form-control-lg", placeholder="If you have an answer, share it!") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        {% endif %}
+
     </div>
     {% include "sidebar.html" %}
 {% endblock content %}

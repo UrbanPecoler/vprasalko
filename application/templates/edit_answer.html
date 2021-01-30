@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="col-md-8 pd-0 mg-0">
+        <div class="forum-title">
+            <h3>Edit your answer</h3>
+        </div>
+        <hr class="title-line">
+        <div class="mx-auto edit-profile">
+            <div class=" mx-auto">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group mb-0">
+                        <div class="form-group">
+                            {% if form.answer.errors %}
+                                {{ form.answer(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.answer.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.answer(class="form-control form-control-lg", placeholder="If you have an answer, share it!") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-info") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+        <article class="media content-section mt-5">
+            <div class="media-body">
+                <div class="article-metadata">                   
+                    <h1 class="question-title">{{ question.title }}</h1>
+                    <hr class="title-line">
+                </div>
+                <p class="article-content">{{ question.content }}</p>
+            </div>
+        </article>    
+    </div>
+
+{% include "sidebar.html" %}
+{% endblock content %}

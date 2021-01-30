@@ -7,17 +7,20 @@
         <hr class="title-line">
         <div class="media">
             <div class="media-body">
-                <h2 class="account-heading">{{ current_user.username }}</h2>
-                <p class="text-secondary">E-mail: {{ current_user.email }}</p>
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">E-mail: {{ user.email }}</p>
                 <h5>Description</h5>
                 <article class="media content-section">
                     <div class="media-body">
-                        {{ current_user.description }}
+                        {{ user.description }}
                     </div>
                 </article>
-                <h4>Asked Questions</h4>
+                <span class="row ml-auto"> 
+                    <h4>Questions</h4> 
+                    <h4 class="ml-1">({{ questions.total }})</h4>
+                </span>
                 <hr class="title-line">
-                {% for question in questions %}
+                {% for question in questions.items %}
                     <article class="media content-section">
                         <div class="media-body">
                             <div class="row">
@@ -44,9 +47,23 @@
                         </div>
                     </article>
                 {% endfor %}
-            </div>
-        </div>     
+                <div class="page-align"> 
+                    {% for page_num in questions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                        {% if page_num %}
+                            {% if questions.page == page_num %}
+                                <a class="btn btn-dark mb-4" href="{{ url_for('user_profile', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                            {% else %}
+                                <a class="btn btn-outline-dark mb-4" href="{{ url_for('user_profile', username=user.username, page=page_num) }}">{{ page_num }}</a>
+                            {% endif %}
+                        {% else %}
+                            ...
+                        {% endif %}
+                    {% endfor %}    
+                </div>
+           </div>
+        </div> 
     </div>
+
     {% include "sidebar.html" %}
 
 {% endblock content %}

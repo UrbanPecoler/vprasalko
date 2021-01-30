@@ -53,3 +53,7 @@ class QuestionForm(FlaskForm):
                                              message="Question can be a maximum of 50 characters long")], description="test")
     content = StringField("Body", validators=[InputRequired()], widget=TextArea())
     submit = SubmitField("Ask your question")
+
+class AnswerForm(FlaskForm):
+    answer =  StringField("Your answer", validators=[InputRequired()], widget=TextArea()) 
+    submit = SubmitField("Post your answer")
