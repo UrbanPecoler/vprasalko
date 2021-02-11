@@ -153,6 +153,15 @@ h1, h2, h3, h4, h5, h6 {
   font-size: small;
 }
 
+/* Filter By */
+.vertical-line {
+
+}
+
+.btn-custom:hover {
+  background-color: grey;
+}
+
 /* Viewed Question */
 .question-title {
   font-size: xx-large;
@@ -185,6 +194,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 5px;
 }
 
+/* Sidebar */
+.sidebar-link {
+  color: inherit;
+}
 
-
-
+.sidebar-link:hover {
+  text-decoration: none;
+}

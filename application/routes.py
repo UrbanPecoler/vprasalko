@@ -12,6 +12,18 @@ def home():
     questions = Question.query.order_by(Question.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template("home.html", questions=questions)
 
+@app.route("/home/most_viewed")
+def most_viewed():
+    page = request.args.get("page", default=1, type=int)
+    questions = Question.query.order_by(Question.views.desc()).paginate(page=page, per_page=5)
+    return render_template("home.html", questions=questions)
+
+@app.route("/home/most_answered")
+def most_answered():
+    page = request.args.get("page", default=1, type=int)
+    questions = Question.query.order_by(Question.num_answers.desc()).paginate(page=page, per_page=5)
+    return render_template("home.html", questions=questions)
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -153,6 +165,7 @@ def delete_answer(question_id, answer_id):
     if answer.author != current_user:
         abort(403)
     db.session.delete(answer)
+    question.num_answers -= 1
     db.session.commit()
     flash('Your answer has been deleted!', 'success')
     return redirect(url_for('question_post', question_id=question_id))

@@ -3,7 +3,11 @@
     <div class="col-md-8 pd-0 mg-0">
         <div class="forum-title">
             <div class="float-right forum-desc filter">
-                <small>Filter: New | Top</small>
+                <small> 
+                    <a class="btn btn-sm btn-custom" href="/"> Latest</a> | 
+                    <a class="btn btn-sm btn-custom" href="{{ url_for('most_viewed') }}">Most viewed</a> | 
+                    <a class="btn btn-sm btn-custom" href="{{ url_for('most_answered') }}">Most answered</a>
+                </small>
             </div>
             <h3>Mathematics</h3>
         </div>
