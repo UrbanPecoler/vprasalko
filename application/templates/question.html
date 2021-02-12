@@ -5,7 +5,7 @@
             <div class="media-body">
                 <div class="article-metadata">                   
                     <h1 class="question-title">{{ question.title }}</h1>
-                        <small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ question.author.username }}</a> </small>
+                        <small class="ml-5 mr-5">Author: <a class="mr-auto" href="{{ url_for('user_profile', username=question.author.username) }}">{{ question.author.username }}</a> </small>
                         <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%d-%m-%Y') }}</small>
                         <small class="ml-5">Views: <b>{{ question.views }}</b></small>
                     <hr class="title-line">
