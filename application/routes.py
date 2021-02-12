@@ -4,7 +4,7 @@ from application.forms import RegistrationForm, LoginForm, UpdateProfileForm, Qu
 from application.models import User, Question, Answer
 from flask_login import login_user, current_user, logout_user, login_required
 
-
+# ROUTES FOR THE HOMEPAGE
 @app.route("/")
 @app.route("/home")
 def home():
@@ -24,6 +24,8 @@ def most_answered():
     questions = Question.query.order_by(Question.num_answers.desc()).paginate(page=page, per_page=5)
     return render_template("home.html", questions=questions)
 
+
+# LOGIN AND REGISTER
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -37,6 +39,11 @@ def login():
             flash('Username or password are incorrect.', 'danger')
     return render_template("login.html", title="Login", form=form)
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
@@ -49,17 +56,14 @@ def register():
         return redirect(url_for('home'))
     return render_template("register.html", title="Login", form=form)
 
-@app.route("/logout")
-def logout():
-    logout_user()
-    return redirect(url_for('home'))
 
+# PROFILE
 @app.route("/profile")
 @login_required
 def profile():
-    user = User.query.filter_by(username=current_user).first_or_404()
-    questions = Question.query.filter_by(author=user)
-    return render_template('profile.html', title='Profile', questions=questions, user=user)
+    page = request.args.get('page', 1, type=int)
+    questions = Question.query.filter_by(author=current_user).order_by(Question.date_posted.desc()).paginate(page=page, per_page=3)
+    return render_template('main_profile.html', title='Profile', questions=questions)
 
 @app.route("/edit_profile", methods=['GET', 'POST'])
 @login_required
@@ -80,6 +84,15 @@ def edit_profile():
         form.description.data = current_user.description
     return render_template('edit_profile.html', title='Edit-profile', form=form)
 
+@app.route("/user/<string:username>")
+def user_profile(username):
+    page = request.args.get('page', 1, type=int)
+    user = User.query.filter_by(username=username).first_or_404()
+    questions = Question.query.filter_by(author=user).order_by(Question.date_posted.desc()).paginate(page=page, per_page=3)
+    return render_template('profile.html', questions=questions, user=user)
+
+
+# QUESTIONS
 @app.route("/question/new", methods=['GET', 'POST'])
 @login_required
 def new_question():
@@ -122,7 +135,7 @@ def update_question(question_id):
         question.content = form.content.data
         db.session.commit()
         flash('Your question has been updated!', 'success')
-        return redirect(url_for('new_question', question_id=question_id))
+        return redirect(url_for('question_post', question_id=question_id))
     elif request.method == 'GET':
         form.title.data = question.title
         form.content.data = question.content
@@ -140,6 +153,8 @@ def delete_question(question_id):
     flash('Your question has been deleted!', 'success')
     return redirect(url_for('home'))
 
+
+# ANSWERS
 @app.route("/question/<int:question_id>/edit_comment/<int:answer_id>", methods=["GET", "POST"])
 @login_required
 def edit_answer(question_id, answer_id):
@@ -170,9 +185,3 @@ def delete_answer(question_id, answer_id):
     flash('Your answer has been deleted!', 'success')
     return redirect(url_for('question_post', question_id=question_id))
 
-@app.route("/user/<string:username>")
-def user_profile(username):
-    page = request.args.get('page', 1, type=int)
-    user = User.query.filter_by(username=username).first_or_404()
-    questions = Question.query.filter_by(author=user).order_by(Question.date_posted.desc()).paginate(page=page, per_page=3)
-    return render_template('profile.html', questions=questions, user=user)

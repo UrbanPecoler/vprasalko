@@ -7,7 +7,7 @@
                     <h1 class="question-title">{{ question.title }}</h1>
                         <small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ question.author.username }}</a> </small>
                         <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%d-%m-%Y') }}</small>
-                        <small class="ml-5">Likes: <b>10</b></small>
+                        <small class="ml-5">Views: <b>{{ question.views }}</b></small>
                     <hr class="title-line">
                 </div>
                 <p class="article-content">{{ question.content }}</p>
@@ -19,6 +19,7 @@
                 {% endif %}
             </div>
         </article>
+
         <!-- Delete question -->
         <div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -60,8 +61,8 @@
                             {% endif %}
                         </div>
                         <div class="col-md-6 mr-auto">
-                            <div class="answer-author">
-                                <ul class="answer-info">
+                            <div class="answer-author border ">
+                                <ul class="answer-info pl-0 mt-3">
                                     <li class="list-group"><small class="mr-5 ml-5">Answered {{ answer.date_posted.strftime('%d-%m-%Y') }}</small></li>
                                     <li class="list-group"><small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ answer.author.username }}</a> </small></li>
                                 </ul>

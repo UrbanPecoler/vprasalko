@@ -22,52 +22,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
 }
 
-
-/* SearchBar */
-.searchbar{
-  margin-bottom: auto;
-  margin-top: auto;
-  height: 40px;
-  background-color: #f0f0f0;
-  border-radius: 30px;
-  padding: 10px;
-  }
-
-  .search_input{
-  color: white;
-  border: 0;
-  outline: 0;
-  background: none;
-  width: 0;
-  caret-color:transparent;
-  line-height: 20px;
-  transition: width 0.4s linear;
-  }
-
-  .searchbar:hover > .search_input{
-  padding: 0 10px;
-  width: 450px;
-  caret-color:rgb(112, 111, 168);
-  transition: width 0.4s linear;
-  }
-
-  .searchbar:hover > .search_icon{
-  background: white;
-  color: #e74c3c;
-  }
-
-  .search_icon{
-  height: 20px;
-  width: 20px;
-  float: right;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  color:white;
-  text-decoration:none;
-  }
-
 /* Login */
 .login {
   margin-right: 10px;
@@ -153,11 +107,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: small;
 }
 
-/* Filter By */
-.vertical-line {
-
-}
-
 .btn-custom:hover {
   background-color: grey;
 }
@@ -201,4 +150,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-link:hover {
   text-decoration: none;
+}
+
+/* Profile*/
+.edit-profile-btn {
+  text-align: center;
 }

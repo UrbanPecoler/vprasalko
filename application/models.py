@@ -39,4 +39,4 @@ class Answer(db.Model, UserMixin):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 
     def __repr__(self):
-        return f"Answer('{self.user}', '{self.date_posted}')"
+        return f"Answer('{self.answer}', '{self.date_posted}')"

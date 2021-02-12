@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="col-md-8 pd-0 mg-0">
+
+        <!-- Forum title and filter options -->
         <div class="forum-title">
             <div class="float-right forum-desc filter">
                 <small> 
@@ -12,6 +14,8 @@
             <h3>Mathematics</h3>
         </div>
         <hr class="title-line">
+
+        <!-- All questions displayed -->
         {% for question in questions.items %}
             <article class="media content-section">
                 <div class="media-body">
@@ -39,6 +43,8 @@
                 </div>
             </article>
         {% endfor %}
+
+        <!-- Pagination -->
         <div class="page-align"> 
             {% for page_num in questions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                 {% if page_num %}
