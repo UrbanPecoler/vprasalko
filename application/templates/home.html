@@ -6,9 +6,12 @@
         <div class="forum-title">
             <div class="float-right forum-desc filter">
                 <small> 
-                    <a class="btn btn-sm btn-custom" href="/"> Latest</a> | 
-                    <a class="btn btn-sm btn-custom" href="{{ url_for('most_viewed') }}">Most viewed</a> | 
-                    <a class="btn btn-sm btn-custom" href="{{ url_for('most_answered') }}">Most answered</a>
+                    <a class="btn btn-sm btn-custom" 
+                    href="/"> Latest</a> | 
+                    <a class="btn btn-sm btn-custom" 
+                    href="{{ url_for('most_viewed') }}">Most viewed</a> | 
+                    <a class="btn btn-sm btn-custom" 
+                    href="{{ url_for('most_answered') }}">Most answered</a>
                 </small>
             </div>
             <h3>Mathematics</h3>
@@ -33,10 +36,20 @@
                             </div>
                         </div>
                         <div class="col-md-8 pl-5">
-                            <h3><a class="article-title" href="{{ url_for('question_post', question_id=question.id) }}">{{ question.title }}</a></h3>
+                            <h3>
+                                <a class="article-title" 
+                                href="{{ url_for('question_post', question_id=question.id) }}">
+                                    {{ question.title }}
+                                </a>
+                            </h3>
                             <div class="article-metadata article-info">            
-                                <a class="mr-2" href="{{ url_for('user_profile', username=question.author.username) }}">{{ question.author.username }}</a>
-                                <small class="text-muted">asked on {{ question.date_posted.strftime('%d.%m.%Y %H:%M') }}</small>
+                                <a class="mr-2" 
+                                href="{{ url_for('user_profile', username=question.author.username) }}">
+                                    {{ question.author.username }}
+                                </a>
+                                <small class="text-muted">
+                                    asked on {{ question.date_posted.strftime('%d.%m.%Y %H:%M') }}
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -46,12 +59,16 @@
 
         <!-- Pagination -->
         <div class="page-align"> 
-            {% for page_num in questions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% for page_num in questions.iter_pages(
+                left_edge=1, right_edge=1, left_current=1, right_current=2
+            ) %}
                 {% if page_num %}
                     {% if questions.page == page_num %}
-                        <a class="btn btn-dark mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-dark mb-4" 
+                        href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="btn btn-outline-dark mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-outline-dark mb-4" 
+                        href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     ...

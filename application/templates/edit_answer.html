@@ -21,7 +21,10 @@
                                     {% endfor %}
                                 </div>
                             {% else %}
-                                {{ form.answer(class="form-control form-control-lg", placeholder="If you have an answer, share it!") }}
+                                {{ form.answer(
+                                    class="form-control form-control-lg", 
+                                    placeholder="If you have an answer, share it!"
+                                ) }}
                             {% endif %}
                         </div>
                     </fieldset>

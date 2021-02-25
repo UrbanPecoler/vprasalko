@@ -14,7 +14,9 @@
                 <fieldset class="form-group">
                     <div class="form-group">
                         <h5 class="mb-0 mt-0">{{ form.title.label(class="form-control-label ") }}</h4>
-                        <small>Be specific and imagine you’re asking a question to another person</small>
+                        <small>
+                            Be specific and imagine you’re asking a question to another person
+                        </small>
                         {% if form.title.errors %}
                             {{ form.title(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -23,12 +25,17 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                            {{ form.title(class="form-control form-control-lg", placeholder="What is you mathematics question?") }}
+                            {{ form.title(
+                                class="form-control form-control-lg", 
+                                placeholder="What is you mathematics question?"
+                            ) }}
                         {% endif %}
                     </div>
                     <div class="form-group">
                         <h5 class="mb-0 mt-0">{{ form.content.label(class="form-control-label") }}</h5>
-                        <small>Include all the information someone would need to answer your question</small>
+                        <small>
+                            Include all the information someone would need to answer your question
+                        </small>
                         {% if form.content.errors %}
                             {{ form.content(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">

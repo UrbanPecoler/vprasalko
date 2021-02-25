@@ -5,23 +5,36 @@
             <div class="media-body">
                 <div class="article-metadata">                   
                     <h1 class="question-title">{{ question.title }}</h1>
-                        <small class="ml-5 mr-5">Author: <a class="mr-auto" href="{{ url_for('user_profile', username=question.author.username) }}">{{ question.author.username }}</a> </small>
-                        <small class="mr-5 ml-5">Asked on: {{ question.date_posted.strftime('%d-%m-%Y') }}</small>
+                        <small class="ml-5 mr-5">
+                            Author: 
+                            <a class="mr-auto" 
+                            href="{{ url_for('user_profile', username=question.author.username) }}">
+                                {{ question.author.username }}
+                            </a> 
+                        </small>
+                        <small class="mr-5 ml-5">
+                            Asked on: {{ question.date_posted.strftime('%d-%m-%Y') }}
+                        </small>
                         <small class="ml-5">Views: <b>{{ question.views }}</b></small>
                     <hr class="title-line">
                 </div>
                 <p class="article-content">{{ question.content }}</p>
                 {% if question.author == current_user %}
                 <div class="float-right">
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_question', question_id=question.id) }}">Update</a>
-                    <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" 
+                    href="{{ url_for('update_question', question_id=question.id) }}">
+                        Update
+                    </a>
+                    <button type="button" class="btn btn-danger btn-sm m-1" 
+                    data-toggle="modal" data-target="#deleteModal">Delete</button>
                 </div>
                 {% endif %}
             </div>
         </article>
 
         <!-- Delete question -->
-        <div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal" id="deleteModal" tabindex="-1" 
+        role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -31,8 +44,11 @@
                         </button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form action="{{ url_for('delete_question', question_id=question.id) }}" method="POST">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <form action="{{ url_for('delete_question', question_id=question.id) }}" 
+                        method="POST">
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
                     </div>
@@ -56,15 +72,42 @@
                     <div class="row">
                         <div class="col-md-6">
                             {% if answer.author == current_user %}
-                                <small class="mr-5 ml-3"><a href="{{ url_for('edit_answer', question_id=question.id, answer_id=answer.id) }}">Edit</a></small>
-                                <small><a href="#" data-toggle="modal" data-target="#deleteModal1">Delete</a></small>
+                                <small class="mr-5 ml-3">
+                                    <a 
+                                    href="{{ url_for(
+                                        'edit_answer',
+                                        question_id=question.id,
+                                        answer_id=answer.id
+                                    ) }}">
+                                        Edit
+                                    </a>
+                                </small>
+                                <small>
+                                    <a href="#" data-toggle="modal" data-target="#deleteModal1">
+                                        Delete
+                                    </a>
+                                </small>
                             {% endif %}
                         </div>
                         <div class="col-md-6 mr-auto">
                             <div class="answer-author border ">
                                 <ul class="answer-info pl-0 mt-3">
-                                    <li class="list-group"><small class="mr-5 ml-5">Answered {{ answer.date_posted.strftime('%d-%m-%Y') }}</small></li>
-                                    <li class="list-group"><small class="ml-5 mr-5">Author: <a class="mr-auto" href="#">{{ answer.author.username }}</a> </small></li>
+                                    <li class="list-group">
+                                        <small class="mr-5 ml-5">
+                                            Answered {{ answer.date_posted.strftime('%d-%m-%Y') }}
+                                        </small>
+                                    </li>
+                                    <li class="list-group">
+                                        <small class="ml-5 mr-5">Author: 
+                                            <a class="mr-auto" 
+                                            href="{{ url_for(
+                                                'user_profile',
+                                                username=answer.author.username
+                                            ) }}">
+                                                {{ answer.author.username }}
+                                            </a> 
+                                        </small>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -75,7 +118,8 @@
         </article>
 
         <!-- Delete an answer -->
-        <div class="modal fade" id="deleteModal1" tabindex="-1" role="dialog" aria-labelledby="deleteModal1Label" aria-hidden="true">
+        <div class="modal fade" id="deleteModal1" tabindex="-1" 
+        role="dialog" aria-labelledby="deleteModal1Label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -85,8 +129,13 @@
                         </button>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <form action="{{ url_for('delete_answer', question_id=question.id, answer_id=answer.id) }}" method="POST">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <form action="{{ url_for(
+                            'delete_answer', question_id=question.id, answer_id=answer.id
+                        ) }}" 
+                        method="POST">
                             <input class="btn btn-danger" type="submit" value="Delete">
                         </form>
                     </div>
@@ -97,12 +146,20 @@
         <!-- Pagination -->
         {% endfor %}
         <div class="page-align"> 
-            {% for page_num in answers.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% for page_num in answers.iter_pages(
+                left_edge=1, right_edge=1, left_current=1, right_current=2)
+            ) %}
                 {% if page_num %}
                     {% if answers.page == page_num %}
-                        <a class="btn btn-dark mb-4" href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-dark mb-4" 
+                        href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">
+                            {{ page_num }}
+                        </a>
                     {% else %}
-                        <a class="btn btn-outline-dark mb-4" href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">{{ page_num }}</a>
+                        <a class="btn btn-outline-dark mb-4"
+                        href="{{ url_for('question_post', question_id=question.id, page=page_num) }}">
+                            {{ page_num }}
+                        </a>
                     {% endif %}
                 {% else %}
                     ...
@@ -116,7 +173,7 @@
                 {{ form.hidden_tag() }}
                 <fieldset class="form-group mb-1">
                     <div class="form-group">
-                        <h5 class="mb-0 mt-4">{{ form.answer.label(class="form-control-label ") }}</h4>
+                        <h4 class="mb-0 mt-4">{{ form.answer.label(class="form-control-label ") }}</h4>
                         {% if form.answer.errors %}
                             {{ form.answer(class="form-control form-control-lg is-invalid") }}
                             <div class="invalid-feedback">
@@ -125,7 +182,10 @@
                                 {% endfor %}
                             </div>
                         {% else %}
-                            {{ form.answer(class="form-control form-control-lg", placeholder="If you have an answer, share it!") }}
+                            {{ form.answer(
+                                class="form-control form-control-lg", 
+                                placeholder="If you have an answer, share it!"
+                            ) }}
                         {% endif %}
                     </div>
                 </fieldset>
