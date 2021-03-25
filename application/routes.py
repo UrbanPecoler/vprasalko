@@ -16,7 +16,7 @@ def home():
         .order_by(Question.date_posted.desc())
         .paginate(page=page, per_page=5)
     )
-    return render_template("home.html", questions=questions)
+    return render_template("index.html", questions=questions)
 
 
 @app.route("/home/most_viewed")
@@ -27,7 +27,7 @@ def most_viewed():
         .order_by(Question.views.desc())
         .paginate(page=page, per_page=5)
     )
-    return render_template("home.html", questions=questions)
+    return render_template("index.html", questions=questions)
 
 
 @app.route("/home/most_answered")
@@ -38,7 +38,7 @@ def most_answered():
         .order_by(Question.num_answers.desc())
         .paginate(page=page, per_page=5)
     )
-    return render_template("home.html", questions=questions)
+    return render_template("index.html", questions=questions)
 
 
 # LOGIN AND REGISTER
